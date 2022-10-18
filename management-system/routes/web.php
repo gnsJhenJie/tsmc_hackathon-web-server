@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,4 +24,10 @@ Route::get('/login', [UserController::class, 'loginIndex'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UserController::class, 'logout']);
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/area', [AreaController::class, 'index'])->name('area');
+    Route::get('/area/create', [AreaController::class, 'create']);
+    Route::post('/area/create', [AreaController::class, 'store']);
 });
