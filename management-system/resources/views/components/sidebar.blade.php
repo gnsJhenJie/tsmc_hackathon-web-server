@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="ts-divider"></div>
-    <a href="/dashboard" class="ts-content is-interactive is-dense">
+    <a href="/" class="ts-content is-interactive is-dense">
         <div class="ts-row">
             <div class="column is-fluid">
                 <div class="ts-text is-bold">儀表板</div>
@@ -51,7 +51,7 @@
         <a href="/admin/settings/policy" class="item">即時影像</a>
         <a href="/admin/settings/policy" class="item">訊息推播</a>
         <a href="/area" class="item">工區管理</a>
-        <a href="/admin/settings/policy" class="item">攝影機管理</a>
+        <a href="/camera" class="item">攝影機管理</a>
     </div>
     <div class="ts-space is-small"></div>
     <div class="ts-divider"></div>
