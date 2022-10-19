@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
-class CreateIncidentsTable extends Migration
+class CreateIncidentTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +14,18 @@ class CreateIncidentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('incidents', function (Blueprint $table) {
+        Schema::create('incident_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("area_id")->constrained();
-            $table->foreignId("camera_id")->constrained();
-            $table->string("managers");
-            $table->unsignedTinyInteger("status");
-            $table->text("description");
+            $table->string("name",255);
             $table->timestamps();
         });
+
+        DB::table('incident_types')->insert(
+            array(
+                'name' => '未戴安全帽(自動識別)'
+            )
+        );
+
     }
 
     /**
@@ -31,6 +35,6 @@ class CreateIncidentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('incidents');
+        Schema::dropIfExists('incident_types');
     }
 }
