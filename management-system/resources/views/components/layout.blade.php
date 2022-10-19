@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.0.4/tocas.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.0.4/tocas.min.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="/js/watermark.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 </head>
 
@@ -27,6 +28,17 @@
             </div>
         </div>
     </div>
+
 </body>
+<script>
+    // 自定義樣式
+    const setting = {
+        "text": "TSMC {{auth()->user()->name}}",
+        "innerDate": true, // 在水印下方增加日期
+        // "width": 120 // 水印寬度
+    };
+    // 渲染
+    watermark.build(setting);
+</script>
 
 </html>
