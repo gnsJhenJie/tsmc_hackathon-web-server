@@ -76,7 +76,8 @@
                         <td>
                             {{$camera->area()->first()->name}}
                         </td>
-                        <td>上線</td>
+                        <td>{{$camera->last_active_time < now()->subMinutes(10) ?
+                                "不在線(最後上線:".$camera->last_active_time.")" : "在線"}}</td>
                         <td>{{$camera->token}}</td>
                         <td class="ts-wrap is-compact">
                             <a href="/camera/{{$camera->id}}">
