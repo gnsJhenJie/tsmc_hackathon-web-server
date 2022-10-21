@@ -30,10 +30,10 @@
         </div>
     </div>
     <div class="ts-menu is-dense is-small" style="opacity: 0.8">
-        <a href="/admin/apply/pending" class="item">待處理</a>
-        <a href="/admin/apply/active" class="item">已處理</a>
-        <a href="/admin/apply/rejected" class="item">手動新增</a>
-        <a href="/admin/apply/revoked" class="item">統計報表</a>
+        <a href="/incident/pending" class="item">待處理</a>
+        <a href="/incident/done" class="item">已處理</a>
+        <a href="/incident/create" class="item">手動新增</a>
+        <a href="/incident/statistics" class="item">統計報表</a>
     </div>
     <div class="ts-space is-small"></div>
     <div class="ts-divider"></div>
@@ -85,16 +85,5 @@
         <a href="/admin/settings/policy" class="item">使用者管理</a>
         <a href="/admin/" class="item">Line綁定</a>
     </div>
-    <div class="ts-space is-small"></div>
-    <div class="ts-divider"></div>
-    <a href="#!" class="ts-content is-interactive is-dense">
-        <div class="ts-row">
-            <div class="column is-fluid">
-                <div class="ts-text is-bold">操作手冊(施工中)</div>
-            </div>
-            <div class="column">
-                <span class="ts-icon is-flag-icon"></span>
-            </div>
-        </div>
-    </a>
+
 </div>

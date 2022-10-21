@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/cameraIncident', [IncidentController::class, 'storeCameraIncidentFromAPI']);
 Route::post('/camera', [CameraController::class, 'activeCheckFromAPI']);
