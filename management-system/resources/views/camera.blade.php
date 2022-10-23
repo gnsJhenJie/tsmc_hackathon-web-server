@@ -14,7 +14,7 @@
                 我管理的攝影機(施工中)
             </div>
             <div class="symbol">
-                <span class="ts-icon is-clock-icon"></span>
+                <span class="ts-icon is-camera-icon"></span>
             </div>
         </div>
     </div>
@@ -51,7 +51,10 @@
                         </td>
                         <td>{{$camera->last_active_time < now()->subMinutes(10) ?
                                 "不在線(最後上線:".$camera->last_active_time.")" : "在線"}}</td>
-                        <td>{{$camera->token}}</td>
+                        <td>
+                            <div class="hiddenContent" maxlength = "40">*****</div>
+                            <div class="storeToken" hidden>{{$camera->token}}</div>
+                        </td>
                         <td class="ts-wrap is-compact">
                             <a href="/camera/{{$camera->id}}">
                                 <button class="ts-button is-small ">詳細資料</button>
@@ -76,4 +79,26 @@
         <div class="ts-space is-big"></div>
     </div>
 </div>
+<script>
+    function initalize(){   
+        //const token = document.getElementById("storeToken").innerHTML;
+
+        var starArray = document.getElementsByClassName("hiddenContent");
+        var elements = document.getElementsByClassName("storeToken");
+        var tokenArray = [];
+        for(let n=0; n < elements.length; n++){
+            tokenArray.push(elements[n].innerHTML);
+            starArray[n].addEventListener("click",function(){hide(n);},false);
+        }
+        
+        function hide(n){
+            if (starArray[n].innerHTML === "*****") {
+                starArray[n].innerHTML = tokenArray[n];
+            } else {
+                starArray[n].innerHTML = "*****";
+            }
+        }
+    }
+    initalize()
+</script>
 @stop
