@@ -16,7 +16,7 @@
     <div class="ts-center">
         <div class="ts-header is-large is-heavy is-icon">
             <div class="ts-icon is-helmet-safety-icon"></div>
-            工地安全管理系統-戀愛巴士新竹站-KEVIN
+            工地安全管理系統-戀愛巴士新竹站
         </div>
         <div class="ts-space is-large"></div>
         <div class="ts-segment" style="width: 320px">
