@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,6 +17,10 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::orderBy('role', 'DESC')->paginate(8);
+
+        return view('user')
+            ->with('users', $users);
     }
 
     /**
@@ -27,6 +31,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('user_create');
     }
 
     /**
@@ -38,6 +43,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        User::create([
+            'email' => $request->email,
+            'name' => $request->name,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'token' => md5(rand(1,10).microtime()),
+        ]);
+        return redirect()->route('user');
     }
 
     /**
@@ -72,6 +85,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $user->update([
+            "role" => $request->role,
+        ]);
+
+        return redirect()->route('user');
     }
 
     /**
@@ -127,6 +145,26 @@ class UserController extends Controller
         return redirect()->route('login')->withErrors([
             'logout' => 'Logout success.',
         ]);
+    }
+
+    public function showLineToken()
+    {
+        return view('user_line')
+            ->with('token', auth()->user()->token);
+    }
+
+    public function registerLine(Request $request)
+    {
+        if ($request->management_secret == env('LINE_FLASK_SECRET')) {
+            $user = User::where('token','=',$request->register_token)->firstOrFail();
+            $user->update([
+                'line_user_id' => $request->line_user_id,
+            ]);
+            $user->save();
+            return "Success";
+        }else {
+            abort(403);
+        }
     }
 
 }

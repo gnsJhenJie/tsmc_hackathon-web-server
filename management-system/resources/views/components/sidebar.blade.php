@@ -33,7 +33,7 @@
         <a href="/incident/pending" class="item">待處理</a>
         <a href="/incident/done" class="item">已處理</a>
         <a href="/incident/create" class="item">手動新增</a>
-        <a href="/incident/statistics" class="item">統計報表</a>
+        <a href="/statistics" class="item">統計報表</a>
     </div>
     <div class="ts-space is-small"></div>
     <div class="ts-divider"></div>
@@ -48,14 +48,14 @@
         </div>
     </div>
     <div class="ts-menu is-dense is-small" style="opacity: 0.8">
-        <a href="/admin/settings/policy" class="item">即時影像</a>
-        <a href="/admin/settings/policy" class="item">訊息推播</a>
+        {{-- <a href="/admin/settings/policy" class="item">即時影像</a> --}}
+        {{-- <a href="/admin/settings/policy" class="item">訊息推播</a> --}}
         <a href="/area" class="item">工區管理</a>
         <a href="/camera" class="item">攝影機管理</a>
     </div>
     <div class="ts-space is-small"></div>
     <div class="ts-divider"></div>
-    <div class="ts-content is-dense">
+    {{-- <div class="ts-content is-dense">
         <div class="ts-row">
             <div class="column is-fluid">
                 <div class="ts-text is-bold">記錄檔</div>
@@ -69,7 +69,7 @@
         <a href="/admin/logs" class="item">系統記錄</a>
     </div>
     <div class="ts-space is-small"></div>
-    <div class="ts-divider"></div>
+    <div class="ts-divider"></div> --}}
     <div class="ts-content is-dense">
         <div class="ts-row">
             <div class="column is-fluid">
@@ -81,9 +81,9 @@
         </div>
     </div>
     <div class="ts-menu is-dense is-small" style="opacity: 0.8">
-        <a href="/admin/settings" class="item">一般</a>
-        <a href="/admin/settings/policy" class="item">使用者管理</a>
-        <a href="/admin/" class="item">Line綁定</a>
+        {{-- <a href="/admin/settings" class="item">一般</a> --}}
+        <a href="/user" class="item">使用者管理</a>
+        <a href="/user/line" class="item">Line綁定</a>
     </div>
 
 </div>

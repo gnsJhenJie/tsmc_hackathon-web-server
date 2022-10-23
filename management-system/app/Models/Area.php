@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use App\Models\Camera;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class Area extends Model
@@ -63,5 +64,16 @@ class Area extends Model
     {
         return $this->hasMany(Camera::class);
     }
+
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class);
+    }
+
+    // public static function hasIncidentToday()
+    // {
+    //     return Area::with('incident')->where('')
+    //     return $this->incidents()->where('created_at', '>=', Carbon::now()->subDays(1));
+    // }
 
 }

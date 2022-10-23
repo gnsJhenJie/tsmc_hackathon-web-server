@@ -5,7 +5,7 @@
 @section('content')
 <div class="ts-box is-top-indicated">
     <div class="ts-content is-dense">
-        <div class="ts-header is-heavy">待處理違規通報</div>
+        <div class="ts-header is-heavy">已處理違規通報</div>
     </div>
     <div class="ts-divider"></div>
     <table class="ts-table is-basic">
