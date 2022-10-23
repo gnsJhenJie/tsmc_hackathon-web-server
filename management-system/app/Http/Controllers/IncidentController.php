@@ -6,6 +6,7 @@ use App\Models\Incident;
 use App\Models\IncidentType;
 use App\Models\Camera;
 use App\Models\Area;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -95,12 +96,14 @@ class IncidentController extends Controller
     public function storeCameraIncidentFromAPI(Request $request)
     {
         //
+        // dd($request);
         $camera = Camera::where('token',$request->camera_token)->firstOrFail();
         $area = $camera->area()->first();
 
-        if (Incident::where([['camera_id','=',$camera->id],['area_id','=',$area->id],['created_at','>=', Carbon::now()->subMinutes(30)]])->exists()) {
-            return "Existed";
-        }
+        // TODO: change 1 to 30
+        // if (Incident::where([['camera_id','=',$camera->id],['area_id','=',$area->id],['created_at','>=', Carbon::now()->subMinutes(1)]])->exists()) {
+        //     return "Existed";
+        // }
 
         if (!$request->has('without_amount') || !$request->has('total')) abort(501);
         $detail = [
@@ -122,8 +125,29 @@ class IncidentController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $image->storeAs('incidents_images/', strval($incident->id).'.jpg');
-        } 
+        }
         
+        foreach($area->managers as $user_id){
+            if (!is_null(User::find($user_id)->line_user_id)){
+                $curl = curl_init();
+
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://fe97-2001-288-3001-197-250-56ff-fe96-e9f7.jp.ngrok.io/sendIncident',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('area' => $area->name, 'created_at' => $incident->created_at,'line_user_id' => User::find($user_id)->line_user_id, 'incident_id' => $incident->id, 'without_amount' => intval($request->without_amount)),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+            }
+        }
         return "Success";
     }
 
@@ -178,6 +202,28 @@ class IncidentController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Incident  $incident
+     * @return \Illuminate\Http\Response
+     */
+    public function updateFromAPI(Incident $incident, Request $request)
+    {
+        //
+        if ($request->management_secret != env("MANAGEMENT_SECRET")) abort(401);
+        $description = json_decode($incident->description, true);
+        $description['deal_description'] = "已透過Line Bot完成";
+        $incident->update([
+            'status' => 1,
+            'description' => json_encode($description),
+        ]);
+        $incident->save();
+
+        return "Success";
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Incident  $incident
@@ -200,7 +246,34 @@ class IncidentController extends Controller
             $incident->save();
             $incident->delete();
         }
-        return redirect()->route('incident');
+        return redirect()->route('incident_pending');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Incident  $incident
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyFromAPI(Incident $incident, Request $request)
+    {
+        //
+        if ($request->management_secret != env("MANAGEMENT_SECRET")) abort(401);
+        if ($incident->incident_type_id == 1 && $incident->has_image) {
+            Storage::copy('incidents_images/'.$incident->id.'.jpg', 'mis_identified/'.$incident->id.'.jpg');
+            $incident->update([
+                "status" => 3, // 攝影機誤報
+            ]);
+            $incident->save();
+            $incident->delete();
+        }else {
+            $incident->update([
+                "status" => 4, // 刪除
+            ]);
+            $incident->save();
+            $incident->delete();
+        }
+        return "Success";
     }
 
     public function getIncidentImage(Incident $incident)

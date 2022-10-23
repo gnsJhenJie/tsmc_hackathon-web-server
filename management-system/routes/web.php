@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\IncidentTypeController;
+use App\Http\Controllers\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,11 +52,27 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/incident/pending', [IncidentController::class, 'pendingIndex'])->name('incident_pending');
     Route::get('/incident/done', [IncidentController::class, 'doneIndex'])->name('incident_done');
-    Route::get('/incident/image/{incident}', [IncidentController::class, 'getIncidentImage']);
     Route::get('/incident/create', [IncidentController::class, 'create']);
     Route::get('/incident/{incident}', [IncidentController::class, 'show']);
     Route::post('/incident', [IncidentController::class, 'store']);
     Route::put('/incident/{incident}', [IncidentController::class, 'update']);
     Route::delete('/incident/{incident}', [IncidentController::class, 'destroy']);
 
+    Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::get('/user/create', [UserController::class,'create']);
+    Route::post('/user', [UserController::class, 'store']);
+    Route::put('/user/{user}', [UserController::class, 'update']);
+    Route::get('/user/line', [UserController::class, 'showLineToken']);
+
+    Route::get('/testchart', function () {
+        return view('chart');
+    });
+
+    Route::get('/statistics', function () {
+        return redirect('/statistics/incidentPeriodByDay?beginDate='.(new DateTime())->sub(new DateInterval('P14D'))->format('Y-m-d')."&endDate=".date("Y-m-d"));
+    });
+    Route::get('/statistics/incidentPeriodByDay', [StatisticController::class, 'getPeriodIncidentStatisticsByDay']);
+    
 });
+
+Route::get('/incident/image/{incident}', [IncidentController::class, 'getIncidentImage']);

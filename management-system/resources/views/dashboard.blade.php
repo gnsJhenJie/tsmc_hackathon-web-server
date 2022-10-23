@@ -8,7 +8,7 @@
         <div class="ts-box">
             <div class="ts-content">
                 <div class="ts-statistic">
-                    <div class="value">{{35}}</div>
+                    <div class="value">{{$incidents_30d_count}}</div>
                 </div>
                 全公司近30日違規次數
             </div>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="column">
+    {{-- <div class="column">
         <div class="ts-box">
             <div class="ts-content">
                 <div class="ts-statistic">
@@ -29,12 +29,12 @@
                 <span class="ts-icon is-graduation-cap-icon"></span>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="column">
         <div class="ts-box">
             <div class="ts-content">
                 <div class="ts-statistic">
-                    <div class="value">{{3}}</div>
+                    <div class="value">{{2}}</div>
                     <div class="comparison">/{{20}}</div>
                 </div>
                 負責區域違規次數排名
@@ -48,7 +48,7 @@
         <div class="ts-box">
             <div class="ts-content">
                 <div class="ts-statistic">
-                    <div class="value">{{3}}</div>
+                    <div class="value">{{$incidents_count}}</div>
                 </div>
                 待處理違規通報
             </div>
@@ -73,34 +73,34 @@
                     <tr>
                         <th>區域</th>
                         <th>相機名稱</th>
-                        <th>違規人數</th>
                         <th>通報日期</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($pending_applications as $application)
+                    @forelse ($incidents as $incident)
                     <tr>
-                        <td>{{$application->account}}</td>
-                        <td>{{$application->unit}}</td>
-                        <td>{{$application->name}}</td>
-                        <td>{{$application->created_at}}</td>
+                        <td>{{$incident->area()->first()->name}}</td>
+                        <td>{{$incident->incident_type_id == 1 ? $incident->camera()->first()->name : ""}}</td>
+                        <td>{{$incident->created_at}}</td>
                         <td class="ts-wrap is-compact">
-                            <form action="/apply/{{$application->id}}" method="POST">
-                                @method('PUT')
-                                @csrf
-                                <button type="submit" name="action" value="approve"
-                                    class="ts-button is-small">通過</button><button type="submit" name="action"
-                                    value="reject" class="ts-button is-small is-negative is-outlined">拒絕</button>
-                            </form>
+                            <a href="/incident/{{$incident->id}}">
+                                <button class="ts-button is-small">詳細資料</button>
+                            </a>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5">目前無待處理通報</td>
+                        <td colspan="6">目前無已完成通報</td>
                     </tr>
-                    @endforelse --}}
+                    @endforelse
+
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4">{!! $incidents->links() !!}</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
         <div class="ts-space is-big"></div>
@@ -109,29 +109,29 @@
     <div class="column is-5-wide">
         <div class="ts-box is-top-indicated">
             <div class="ts-content is-dense">
-                <div class="ts-header is-heavy">系統概況</div>
+                <div class="ts-header is-heavy">概況</div>
             </div>
             <div class="ts-divider"></div>
             <div class="ts-content">
                 <div class="ts-text is-bold">本日違規區域數</div>
                 <div class="ts-space is-small"></div>
                 <div class="ts-progress is-small">
-                    <div class="bar" style="width: {{100*5/(30+0.000000001)}}%">
-                        <div class="text">{{5}}</div>
+                    <div class="bar" style="width: {{100*$area_has_incident_count/($area_count+0.000000001)}}%">
+                        <div class="text">{{$area_has_incident_count}}</div>
                     </div>
                     <div class="bar is-secondary" style="width: 100%;">
-                        <div class="text">{{30}}</div>
+                        <div class="text">{{$area_count}}</div>
                     </div>
                 </div>
                 <div class="ts-space is-small"></div>
                 <div class="ts-text is-bold">攝影機上線數量</div>
                 <div class="ts-space is-small"></div>
                 <div class="ts-progress is-small">
-                    <div class="bar" style="width: {{100*2/(5+0.000000001)}}%">
-                        <div class="text">{{2}}</div>
+                    <div class="bar" style="width: {{100*$camera_active_count/($camera_count+0.000000001)}}%">
+                        <div class="text">{{$camera_active_count}}</div>
                     </div>
                     <div class="bar is-secondary" style="width: 100%;">
-                        <div class="text">{{5}}</div>
+                        <div class="text">{{$camera_count}}</div>
                     </div>
                 </div>
                 <div class="ts-space is-small"></div>
