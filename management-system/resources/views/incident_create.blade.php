@@ -9,7 +9,7 @@
             <a class="item is-active">
                 <div class="content">
                     <div class="indicator">
-                        <span class="ts-icon is-user-icon icon"></span>
+                        <span class="ts-icon is-pen-to-square-icon icon"></span>
                     </div>
                     <div class="label">違規單建立</div>
                 </div>
@@ -18,7 +18,7 @@
             <a class="item">
                 <div class="content">
                     <div class="indicator">
-                        <span class="ts-icon is-id-card-icon icon"></span>
+                        <span class="ts-icon is-clipboard-question-icon icon"></span>
                     </div>
                     <div class="label">等待處理</div>
                 </div>
@@ -27,7 +27,7 @@
             <a class="item">
                 <div class="content">
                     <div class="indicator">
-                        <span class="ts-icon is-eye-icon icon"></span>
+                        <span class="ts-icon is-clipboard-check-icon icon"></span>
                     </div>
                     <div class="label">結案</div>
                 </div>

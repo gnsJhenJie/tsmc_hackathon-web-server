@@ -2,7 +2,7 @@
     <div class="ts-content is-center-aligned">
         <div class="ts-wrap is-vertical is-compact is-middle-aligned">
             <div class="ts-image is-mini is-circular">
-                <img src="/assets/images/user.webp">
+                <img src="/assets/images/user.webp" alt="使用者頭像">
             </div>
             <div class="ts-header">{{Auth::user()->name}}</div>
         </div>

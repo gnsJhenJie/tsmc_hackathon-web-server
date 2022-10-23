@@ -14,7 +14,7 @@
                 我管理的工區(施工中)
             </div>
             <div class="symbol">
-                <span class="ts-icon is-clock-icon"></span>
+                <span class="ts-icon is-warehouse-icon"></span>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                             {{-- <button class="ts-button is-small">{{$user->name}}</button> --}}
                             <div class="ts-chip">
                                 <div class="ts-image">
-                                    <img src="/assets/images/user.webp" />
+                                    <img src="/assets/images/user.webp" alt="管理者照片"/>
                                 </div>
                                 {{$user->name}}
                             </div>

@@ -9,12 +9,12 @@
         <a class="box-anchor" href="/incident/{{$incident->id}}">
             <div class="ts-box">
                 @if ($incident->has_image)
-                <div class="ts-image is-4-by-3">
-                    <img src="/incident/image/{{$incident->id}}" style="width: auto; max-height:155px;">
+                <div class="ts-image is-4-by-3" >
+                    <img src="/incident/image/{{$incident->id}}" style="width: auto; max-height:155px;" alt = "這是一張待處理的違規通報照片">
                 </div>
                 @else
                 <div class="ts-image">
-                    <img src="/assets/images/default_incident.png" style="width: auto; max-height:150px;">
+                    <img src="/assets/images/default_incident.png" style="width: auto; max-height:150px;" alt = "這是一則無照片的待處理違規通報">
                 </div>
                 @endif
                 <div class="ts-content">

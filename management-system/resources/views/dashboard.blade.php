@@ -13,7 +13,7 @@
                 全公司近30日違規次數
             </div>
             <div class="symbol">
-                <span class="ts-icon is-right-to-bracket-icon"></span>
+                <span class="ts-icon is-chart-simple-icon"></span>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
                 負責區域近30日違規次數
             </div>
             <div class="symbol">
-                <span class="ts-icon is-graduation-cap-icon"></span>
+                <span class="ts-icon is-people-group-icon"></span>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
                 待處理違規通報
             </div>
             <div class="symbol">
-                <span class="ts-icon is-clock-icon"></span>
+                <span class="ts-icon is-circle-info-icon"></span>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
                 ""}}">
                 <div class="content">
                     <div class="indicator">
-                        <span class="ts-icon is-id-card-icon icon"></span>
+                        <span class="ts-icon is-clipboard-question-icon icon"></span>
                     </div>
                     <div class="label">等待處理</div>
                 </div>
@@ -28,7 +28,7 @@
             <a class="item  {{$incident->status==1 ? " is-completed":""}}">
                 <div class="content">
                     <div class="indicator">
-                        <span class="ts-icon is-eye-icon icon"></span>
+                        <span class="ts-icon is-clipboard-check-icon icon"></span>
                     </div>
                     <div class="label">結案</div>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="ts-row is-center-aligned">
                     <div class="column">
                         <div class="ts-image is-4-by-3">
-                            <img src="/incident/image/{{$incident->id}}" style="max-height: 220px;">
+                            <img src="/incident/image/{{$incident->id}}" style="max-height: 220px;" alt="這是一則違規通報內的詳細照片">
                         </div>
                     </div>
                 </div>
@@ -115,8 +115,8 @@
                             <div class="ts-space"></div>
                             @foreach ($incident->managers() as $user)
                             <div class="ts-chip">
-                                <div class="ts-image">
-                                    <img src="/assets/images/user.webp" />
+                                <div class="ts-image" >
+                                    <img src="/assets/images/user.webp" alt="管理者照片" />
                                 </div>
                                 {{$user->name}}
                             </div>
