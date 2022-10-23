@@ -30,7 +30,7 @@
             </div>
         </div>
     </div> --}}
-    <div class="column">
+    {{-- <div class="column">
         <div class="ts-box">
             <div class="ts-content">
                 <div class="ts-statistic">
@@ -43,7 +43,7 @@
                 <span class="ts-icon is-clipboard-user-icon"></span>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="column">
         <div class="ts-box">
             <div class="ts-content">
